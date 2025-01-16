@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Book Notes</title>
+</head>
+<body>
+    <%#= response %>
+    <div>
+        <h1>Books</h1>
+        <form action="/new" method="post">
+            <button type="submit">Add New Book</button>
+        </form>
+        <form action="/sort" method="post">
+            <p>Sort by</p>
+            <input type="submit" name="title" value="Title">
+            <input type="submit" name="newest" value="Newest">
+            <input type="submit" name="rating" value="Best">
+        </form>
+        <ul>
+            <% books.forEach(book => { %>
+            <li>
+                <strong><%= book.title %></strong>
+                <ul>
+                    <% if (book.coverImage) { %>
+                    <li><img src="<%= book.coverImage %>" alt="Book cover for <%= book.title %>" style="width: 100px; height: auto;"></li>
+                    <% } else { %>
+                    <li>No cover image available</li>
+                    <% } %>
+                    <li>Author: <%= book.author %></li>
+                    <li>Rating: <%= book.rating %></li>
+                    <li>Date Read: <%= book.read_date %></li>
+                    <li>Notes: <%= book.notes %></li>
+                </ul>
+                <a class="edit" href="/edit/<%= book.id %>">Edit</a>
+                <a class="delete" href="/delete/<%= book.id %>">Delete</a>
+            </li>
+            <% }); %>
+        </ul>
+    </div>
+</body>
+</html>
