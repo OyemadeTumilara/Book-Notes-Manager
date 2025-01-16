@@ -11,6 +11,7 @@ This project is a web application that helps users manage their book notes. User
 - **views**
   - **index.ejs**: Main view file
   - **new.ejs**: View file for adding or editing books
+- **queries.sql**: Source file for SQL queries
 - **package.json**
 - **package-lock.json**
 
