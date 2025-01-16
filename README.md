@@ -35,3 +35,44 @@ This project is a web application that helps users manage their book notes. User
 
    # Open the application in your browser
    http://localhost:3000
+
+## Database Setup
+
+1. **Ensure you have PostgreSQL installed and running.**
+  
+2. **Create a database named booknotes**
+
+   CREATE DATABASE booknotes;
+   
+3. **Set up the database connection**
+   
+  - Open index.js and update the database configuration to match your PostgreSQL setup:
+   const db = new pg.Client({
+   user: "your_postgres_username",
+   host: "localhost",
+   database: "booknotes",
+   password: "your_postgres_password",
+   port: 5432,
+   });
+db.connect();
+
+4. **Run the SQL queries in the queries.sql file to set up the necessary tables**:
+
+- -- Drop the books table if it exists
+DROP TABLE IF EXISTS books;
+
+- -- Create the books table
+CREATE TABLE books (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  author VARCHAR(255) NOT NULL,
+  rating INTEGER,
+  read_date DATE,
+  notes TEXT
+);
+
+- -- Insert sample data
+INSERT INTO books (title, author, rating, read_date, notes)
+VALUES
+  ('The Great Gatsby', 'F. Scott Fitzgerald', 5, '2023-01-01', 'A classic novel set in the Jazz Age'),
+  ('1984', 'George Orwell', 4, '2023-02-15', 'A dystopian novel about totalitarianism');
